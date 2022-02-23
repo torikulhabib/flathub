@@ -13,11 +13,24 @@ finish-args:
   - '--socket=x11'
   - '--device=all'
   - '--filesystem=xdg-videos'
+  - '--env=GST_PLUGIN_PATH=/app/lib/codecs/lib/gstreamer-1.0'
+  - '--env=GST_PLUGIN_SYSTEM_PATH=/app/lib/gstreamer-1.0'
 cleanup:
   - '*.a'
   - '*.la'
   - '/include'
 modules:
+  - 'shared-modules/libcanberra/libcanberra.json'
+  - 'codecs/liba52.json'
+  - 'codecs/libmpeg2.json'
+  - 'codecs/libdvdcss.json'
+  - 'codecs/libdvdread.json'
+  - 'codecs/libdvdnav.json'
+  - 'codecs/libass.json'
+  - 'codecs/ffmpeg.json'
+  - 'codecs/gstreamer.json'
+  - 'codecs/pipewire.json'
+
   - name: libgssdp-1.2-0
     buildsystem: meson
     sources:
@@ -36,12 +49,6 @@ modules:
       - type: git
         url: https://github.com/GNOME/gupnp-av.git
         tag: gupnp-av-0.12.11
-  - name: libcanberra
-    buildsystem: autotools
-    sources:
-      - type: archive
-        url: http://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz
-        sha256: c2b671e67e0c288a69fc33dc1b6f1b534d07882c2aceed37004bf48c601afa72
   - name: taglib
     buildsystem: cmake
     sources:
